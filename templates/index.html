@@ -1,0 +1,45 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+
+<h1>Phononscan Alpha</h1> <form id="form">
+  <h2>Please enter an ethereum wallet address or ENS</h2>
+  <input type="text" id="rinput" size="45" autofocus>
+
+  <button type="submit" name="button">Submit</button>
+ </form>
+ <div class="lds-ripple" id="loader"><div></div><div></div></div>
+ <pre id="output"></pre>
+ <p id="para">Input an ENS or wallet address to see if it is a phonon.  If it's not a phonon, we'll check recent transactions to see if the address interacted with phonons on-chain.  Currently only runs on the (now defunct) rinkeby testnet.</p>
+ 
+
+ 
+ <script type="text/javascript">
+    $(document).ready(function() {
+      $('#loader').hide()
+      $('#output').hide()
+      $('#para').show()
+      $('#form').on('submit',function(e){
+        $('#output').hide()
+        $('#para').hide()
+        $('#loader').show()
+        $.ajax({
+          data : {
+            rinput : $('#rinput').val(),
+            //lastname : $('#lastname').val(),
+          },
+          type : 'POST',
+          //type : 'GET',
+          url : '/'
+        })
+        .done(function(data){
+          //$('#output').text(data.message).show();
+          //$('#output').text(data.data).show();
+          var output = JSON.stringify(data, null, '\t')
+          $('#loader').hide()
+          $('#output').html(output).show();
+          $('#rinput').val('');
+        });
+        e.preventDefault();
+      });
+    });
+</script>
