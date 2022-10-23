@@ -24,3 +24,4 @@ Go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
 ## Sample Output
 
+![alt text](https://github.com/byrleyar/phononscan/blob/master/phononscanscreenshot.png "Screenshot of Phononscan")
